@@ -37,15 +37,21 @@ const btnMultiply = document.getElementById("multiply");
 const btnDivide = document.getElementById("divide");
 const btnEquals = document.getElementById("equals");
 
-const btnAC = document.getElementById("ac");
+const btnAC = document.getElementById("ac").addEventListener("click", allClear);
 
 let displayInput = "";
 let display = document.querySelector(".display");
+display.textContent = displayInput;
 
 function updateDisplayInput() {
     display.textContent = displayInput += this.textContent;
-    console.log(displayInput)
 }
+
+function allClear() {
+    displayInput = ""
+    display.textContent = "";
+}
+
 
 function add(num1, num2) {
     return Number(num1) + Number(num2);
