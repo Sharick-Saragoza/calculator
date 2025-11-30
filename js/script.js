@@ -1,3 +1,9 @@
+
+let displayInput = "5555445678455";
+const display = document.querySelector(".display").textContent = displayInput;
+
+
+
 function add(num1, num2) {
     return Number(num1) + Number(num2);
 }

@@ -38,8 +38,13 @@ body {
 }
 
 .display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 70px;
     background-color: green;
+    font-size: x-large;
+    color: rgb(50, 209, 76);
 }
 
 .calc-row {
