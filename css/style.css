@@ -47,7 +47,7 @@ body {
     gap: 25px;
 }
 
-.button, button {
+.button {
     height: 60px;
     width: 60px;
     background-color: grey;
