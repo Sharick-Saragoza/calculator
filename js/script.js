@@ -1,8 +1,51 @@
+// Numbers
+const btn0 = document.getElementById("zero");
+btn0.addEventListener("click", updateDisplayInput);
 
-let displayInput = "5555445678455";
-const display = document.querySelector(".display").textContent = displayInput;
+const btn1 = document.getElementById("one");
+btn1.addEventListener("click", updateDisplayInput);
+
+const btn2 = document.getElementById("two");
+btn2.addEventListener("click", updateDisplayInput);
+
+const btn3 = document.getElementById("three");
+btn3.addEventListener("click", updateDisplayInput);
+
+const btn4 = document.getElementById("four");
+btn4.addEventListener("click", updateDisplayInput);
+
+const btn5 = document.getElementById("five");
+btn5.addEventListener("click", updateDisplayInput);
+
+const btn6 = document.getElementById("six");
+btn6.addEventListener("click", updateDisplayInput);
+
+const btn7 = document.getElementById("seven");
+btn7.addEventListener("click", updateDisplayInput);
+
+const btn8 = document.getElementById("eight");
+btn8.addEventListener("click", updateDisplayInput);
+
+const btn9 = document.getElementById("nine");
+btn9.addEventListener("click", updateDisplayInput);
 
 
+// Operators
+const btnPlus = document.getElementById("plus");
+const btnMinus = document.getElementById("minus");
+const btnMultiply = document.getElementById("multiply");
+const btnDivide = document.getElementById("divide");
+const btnEquals = document.getElementById("equals");
+
+const btnAC = document.getElementById("ac");
+
+let displayInput = "";
+let display = document.querySelector(".display");
+
+function updateDisplayInput() {
+    display.textContent = displayInput += this.textContent;
+    console.log(displayInput)
+}
 
 function add(num1, num2) {
     return Number(num1) + Number(num2);
