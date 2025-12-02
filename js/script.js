@@ -33,9 +33,30 @@ btn9.addEventListener("click", updateDisplayInput);
 // Operators
 const btnPlus = document.getElementById("plus");
 const btnMinus = document.getElementById("minus");
+
+let firstNumber = null;
+let chosenOperator = null;
+
 const btnMultiply = document.getElementById("multiply");
+btnMultiply.addEventListener("click", function multiply() {
+    firstNumber = Number(displayInput);
+    chosenOperator = "x";
+    allClear();
+});
+
+
+
+
+
 const btnDivide = document.getElementById("divide");
+
 const btnEquals = document.getElementById("equals");
+btnEquals.addEventListener("click", () => {
+console.log(operate(firstNumber, chosenOperator, Number(displayInput)))
+
+
+})
+
 
 const btnAC = document.getElementById("ac").addEventListener("click", allClear);
 
@@ -48,7 +69,7 @@ function updateDisplayInput() {
 }
 
 function allClear() {
-    displayInput = ""
+    displayInput = "";
     display.textContent = "";
 }
 
@@ -80,5 +101,6 @@ function operate(num1, operator, num2) {
         return divide(num1, num2);
     }
 }
+
 
 // console.log(operate("20", "+", "20"));
