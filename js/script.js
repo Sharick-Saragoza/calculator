@@ -30,30 +30,41 @@ const btn9 = document.getElementById("nine");
 btn9.addEventListener("click", updateDisplayInput);
 
 
+// First number & chosen operator. 
+let firstNumber = null;
+let chosenOperator = null;
+
 // Operators
 const btnPlus = document.getElementById("plus");
 btnPlus.addEventListener("click", () => {
     firstNumber = Number(display.textContent);
     chosenOperator = "+";
-    console.log(firstNumber)
     allClear();
 });
 
 
 const btnMinus = document.getElementById("minus");
+btnMinus.addEventListener("click", () => {
+    firstNumber = Number(display.textContent);
+    chosenOperator = "-";
+    allClear();
+});
 
-let firstNumber = null;
-let chosenOperator = null;
+
 
 const btnMultiply = document.getElementById("multiply");
 btnMultiply.addEventListener("click", () => {
     firstNumber = Number(display.textContent);
     chosenOperator = "x";
-    console.log(firstNumber)
     allClear();
 });
 
 const btnDivide = document.getElementById("divide");
+btnDivide.addEventListener("click", () => {
+    firstNumber = Number(display.textContent);
+    chosenOperator = "/";
+    allClear();
+});
 
 const btnEquals = document.getElementById("equals");
 btnEquals.addEventListener("click", () => {
