@@ -32,29 +32,32 @@ btn9.addEventListener("click", updateDisplayInput);
 
 // Operators
 const btnPlus = document.getElementById("plus");
+btnPlus.addEventListener("click", () => {
+    firstNumber = Number(display.textContent);
+    chosenOperator = "+";
+    console.log(firstNumber)
+    allClear();
+});
+
+
 const btnMinus = document.getElementById("minus");
 
 let firstNumber = null;
 let chosenOperator = null;
 
 const btnMultiply = document.getElementById("multiply");
-btnMultiply.addEventListener("click", function multiply() {
-    firstNumber = Number(displayInput);
+btnMultiply.addEventListener("click", () => {
+    firstNumber = Number(display.textContent);
     chosenOperator = "x";
+    console.log(firstNumber)
     allClear();
 });
-
-
-
-
 
 const btnDivide = document.getElementById("divide");
 
 const btnEquals = document.getElementById("equals");
 btnEquals.addEventListener("click", () => {
-console.log(operate(firstNumber, chosenOperator, Number(displayInput)))
-
-
+    display.textContent = operate(firstNumber, chosenOperator, Number(displayInput));
 })
 
 
