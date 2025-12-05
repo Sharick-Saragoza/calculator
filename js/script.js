@@ -29,7 +29,6 @@ btn8.addEventListener("click", updateDisplayInput);
 const btn9 = document.getElementById("nine");
 btn9.addEventListener("click", updateDisplayInput);
 
-
 // First number & chosen operator. 
 let firstNumber = null;
 let chosenOperator = null;
@@ -37,40 +36,36 @@ let chosenOperator = null;
 // Operators
 const btnPlus = document.getElementById("plus");
 btnPlus.addEventListener("click", () => {
-    firstNumber = Number(display.textContent);
+    firstNumber += Number(display.textContent);
     chosenOperator = "+";
-    allClear();
+    clearDisplayInput();
 });
-
 
 const btnMinus = document.getElementById("minus");
 btnMinus.addEventListener("click", () => {
-    firstNumber = Number(display.textContent);
+    firstNumber += Number(display.textContent);
     chosenOperator = "-";
-    allClear();
+    clearDisplayInput();
 });
-
-
 
 const btnMultiply = document.getElementById("multiply");
 btnMultiply.addEventListener("click", () => {
-    firstNumber = Number(display.textContent);
+    firstNumber += Number(display.textContent);
     chosenOperator = "x";
-    allClear();
+    clearDisplayInput();
 });
 
 const btnDivide = document.getElementById("divide");
 btnDivide.addEventListener("click", () => {
-    firstNumber = Number(display.textContent);
+    firstNumber += Number(display.textContent);
     chosenOperator = "/";
-    allClear();
+    clearDisplayInput();
 });
 
 const btnEquals = document.getElementById("equals");
 btnEquals.addEventListener("click", () => {
     display.textContent = operate(firstNumber, chosenOperator, Number(displayInput));
 })
-
 
 const btnAC = document.getElementById("ac").addEventListener("click", allClear);
 
@@ -85,8 +80,13 @@ function updateDisplayInput() {
 function allClear() {
     displayInput = "";
     display.textContent = "";
+    firstNumber = null;
 }
 
+function clearDisplayInput() {
+    displayInput = "";
+    display.textContent = "";
+}
 
 function add(num1, num2) {
     return Number(num1) + Number(num2);
@@ -115,6 +115,3 @@ function operate(num1, operator, num2) {
         return divide(num1, num2);
     }
 }
-
-
-// console.log(operate("20", "+", "20"));
