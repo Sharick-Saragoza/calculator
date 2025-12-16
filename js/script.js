@@ -19,14 +19,27 @@ function refreshDisplay() {
 // Operator buttons
 const plusBtn = document.getElementById("plus");
 plusBtn.addEventListener("click", () => {
-    currentOperator = "+";
-    previousNumber = add(Number(previousNumber), Number(currentNumber));
-    currentNumber = "";
-    refreshDisplay()
+    if (currentOperator == "-") {
+        previousNumber = minus(Number(previousNumber), Number(currentNumber));
+        currentOperator = "+";
+        currentNumber = "";
+        refreshDisplay()
+    } else {
+        currentOperator = "+";
+        previousNumber = add(Number(previousNumber), Number(currentNumber));
+        currentNumber = "";
+        refreshDisplay()
+    }
 });
 
 const minusBtn = document.getElementById("minus");
 minusBtn.addEventListener("click", () => {
+    if (currentOperator == "+") {
+        previousNumber = add(Number(previousNumber), Number(currentNumber));
+        currentOperator = "-";
+        currentNumber = "";
+        refreshDisplay()
+    }
     currentOperator = "-";
     if (previousNumber != "") {
         previousNumber = minus(Number(previousNumber), Number(currentNumber));
@@ -56,6 +69,11 @@ function add(num1, num2) {
     return num1 += num2;
 }
 
+function minus(num1, num2) {
+    return num1 -= num2;
+}
+
+// Calculate funtion
 function calculate(operator) {
     switch (operator) {
         case "+":
@@ -63,19 +81,17 @@ function calculate(operator) {
             previousNumber = add(Number(previousNumber), Number(currentNumber));
             currentNumber = "";
             refreshDisplay()
-        break;
+            break;
         case "-":
             currentOperator = "";
             previousNumber = minus(Number(previousNumber), Number(currentNumber));
             currentNumber = "";
             refreshDisplay()
-        break;
+            break;
     }
 }
 
-function minus(num1, num2) {
-    return num1 -= num2;
-}
+
 
 // function multiply(num1, num2) {
 
