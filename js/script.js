@@ -25,6 +25,18 @@ plusBtn.addEventListener("click", () => {
     refreshDisplay()
 });
 
+const minusBtn = document.getElementById("minus");
+minusBtn.addEventListener("click", () => {
+    currentOperator = "-";
+    if (previousNumber != "") {
+        previousNumber = minus(Number(previousNumber), Number(currentNumber));
+    } else {
+        previousNumber = currentNumber;
+    }
+    currentNumber = "";
+    refreshDisplay()
+});
+
 const calculateBtn = document.getElementById("calculate");
 calculateBtn.addEventListener("click", () => {
     calculate(currentOperator);
@@ -52,12 +64,18 @@ function calculate(operator) {
             currentNumber = "";
             refreshDisplay()
         break;
+        case "-":
+            currentOperator = "";
+            previousNumber = minus(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay()
+        break;
     }
 }
 
-// function minus(num1, num2) {
-
-// }
+function minus(num1, num2) {
+    return num1 -= num2;
+}
 
 // function multiply(num1, num2) {
 
