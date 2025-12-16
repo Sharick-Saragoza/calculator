@@ -25,14 +25,26 @@ plusBtn.addEventListener("click", () => {
     refreshDisplay()
 });
 
+const calculateBtn = document.getElementById("calculate");
+calculateBtn.addEventListener("click", () => {
+    calculate(currentOperator);
+});
+
+// Math functions
 function add(num1, num2) {
     return num1 += num2;
 }
 
-function calculate(operator, num1, num2) {
-    
+function calculate(operator) {
+    switch (operator) {
+        case "+":
+            currentOperator = "";
+            previousNumber = add(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay()
+        break;
+    }
 }
-
 
 // function minus(num1, num2) {
 
