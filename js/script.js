@@ -13,12 +13,26 @@ function appendNumber(number) {
 
 // Refresh display
 function refreshDisplay() {
-    display.textContent = currentNumber;
+    display.textContent = `${previousNumber} ${currentOperator} ${currentNumber}`;
 }
 
-// function add(num1, num2) {
+// Operator buttons
+const plusBtn = document.getElementById("plus");
+plusBtn.addEventListener("click", () => {
+    currentOperator = "+";
+    previousNumber = add(Number(previousNumber), Number(currentNumber));
+    currentNumber = "";
+    refreshDisplay()
+});
 
-// }
+function add(num1, num2) {
+    return num1 += num2;
+}
+
+function calculate(operator, num1, num2) {
+    
+}
+
 
 // function minus(num1, num2) {
 
