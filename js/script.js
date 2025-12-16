@@ -30,6 +30,15 @@ calculateBtn.addEventListener("click", () => {
     calculate(currentOperator);
 });
 
+// Clear function
+const allClearBtn = document.getElementById("ac");
+allClearBtn.addEventListener("click", () => {
+    previousNumber = "";
+    currentNumber = "";
+    currentOperator = "";
+    display.textContent = "";
+});
+
 // Math functions
 function add(num1, num2) {
     return num1 += num2;
