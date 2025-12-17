@@ -6,4 +6,9 @@ I built this project to put my JavaScript skills to the test after spending time
 
 ## What it does
 
-*   No information yet.
+Basic math.
+
+*   Add
+*   Subsract
+*   Multiply
+*   Divide
