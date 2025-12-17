@@ -8,10 +8,15 @@ let currentOperator = "";
 // Append number
 function appendNumber(number) {
     currentNumber += number;
-    refreshDisplay()
+    refreshDisplay();
 }
 
 function appendOperator(operator) {
+    if (previousNumber != "" && currentNumber == "") {
+        currentOperator = operator;
+        refreshDisplay();
+    }
+
     if (currentOperator != "") {
         calculate(currentOperator);
         currentOperator = operator;
@@ -31,7 +36,7 @@ const calculateBtn = document.getElementById("calculate");
 calculateBtn.addEventListener("click", () => {
     calculate(currentOperator);
     currentOperator = "";
-    refreshDisplay()
+    refreshDisplay();
 });
 
 // Clear function
