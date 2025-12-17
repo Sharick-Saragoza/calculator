@@ -12,8 +12,14 @@ function appendNumber(number) {
 }
 
 function appendOperator(operator) {
-    currentOperator = operator;
-    calculate(operator)
+    if (currentOperator != "") {
+        calculate(currentOperator);
+        currentOperator = operator;
+        refreshDisplay();
+    } else {
+        calculate(operator);
+        refreshDisplay();
+    }
 }
 
 // Refresh display
@@ -59,24 +65,26 @@ function calculate(operator) {
     if (previousNumber == "") {
         previousNumber = currentNumber;
         currentNumber = "";
-        refreshDisplay()
+        refreshDisplay();
     } else if (operator == "+") {
         previousNumber = add(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
-        refreshDisplay()
+        refreshDisplay();
     } else if (operator == "-") {
         previousNumber = minus(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
-        refreshDisplay()
+        refreshDisplay();
     } else if (operator == "*") {
         previousNumber = multiply(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
-        refreshDisplay()
+        refreshDisplay();
     } else if (operator == "/") {
         previousNumber = divide(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
-        refreshDisplay()
+        refreshDisplay();
     }
+
+    currentOperator = operator;
 }
 
 
