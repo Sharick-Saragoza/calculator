@@ -80,9 +80,11 @@ function calculate(operator) {
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "*") {
-        previousNumber = multiply(Number(previousNumber), Number(currentNumber));
-        currentNumber = "";
-        refreshDisplay();
+        if (currentNumber != "") {
+            previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay();
+        }
     } else if (operator == "/") {
         previousNumber = divide(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
