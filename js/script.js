@@ -11,7 +11,12 @@ function appendNumber(number) {
     refreshDisplay();
 }
 
+// Append operator
 function appendOperator(operator) {
+    if (currentNumber == "-") {
+        return;
+    }
+
     if (previousNumber != "" && currentNumber == "") {
         currentOperator = operator;
         refreshDisplay();
@@ -27,9 +32,14 @@ function appendOperator(operator) {
     }
 
     if (previousNumber == "" && currentNumber == "") {
+        if (operator == "-") {
             currentNumber += "-";
             currentOperator = "";
             refreshDisplay();
+        } else {
+            currentOperator = "";
+            refreshDisplay();
+        }
     }
 }
 
@@ -40,9 +50,13 @@ function refreshDisplay() {
 
 const calculateBtn = document.getElementById("calculate");
 calculateBtn.addEventListener("click", () => {
-    calculate(currentOperator);
-    currentOperator = "";
-    refreshDisplay();
+    if (currentNumber == "-") {
+        return;
+    } else {
+        calculate(currentOperator);
+        currentOperator = "";
+        refreshDisplay();
+    }
 });
 
 // Clear function
