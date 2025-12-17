@@ -29,6 +29,11 @@ plusBtn.addEventListener("click", () => {
         currentOperator = "+";
         currentNumber = "";
         refreshDisplay()
+    } else if (currentOperator == "/") {
+        previousNumber = divide(Number(previousNumber), Number(currentNumber));
+        currentOperator = "+";
+        currentNumber = "";
+        refreshDisplay()
     } else {
         currentOperator = "+";
         previousNumber = add(Number(previousNumber), Number(currentNumber));
@@ -46,6 +51,11 @@ minusBtn.addEventListener("click", () => {
         if (currentOperator == "+") {
             previousNumber = add(Number(previousNumber), Number(currentNumber));
             currentOperator = "-";
+            currentNumber = "";
+            refreshDisplay()
+        } else if (currentOperator == "/") {
+            previousNumber = divide(Number(previousNumber), Number(currentNumber));
+            currentOperator = "/";
             currentNumber = "";
             refreshDisplay()
         }
@@ -72,6 +82,11 @@ multiplyBtn.addEventListener("click", () => {
         currentOperator = "*";
         currentNumber = "";
         refreshDisplay()
+    } else if (currentOperator == "/") {
+        previousNumber = divide(Number(previousNumber), Number(currentNumber));
+        currentOperator = "*";
+        currentNumber = "";
+        refreshDisplay()
     } else {
         if (previousNumber == "") {
             currentOperator = "*";
@@ -81,6 +96,33 @@ multiplyBtn.addEventListener("click", () => {
         } else {
             currentOperator = "*";
             previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay()
+        }
+    }
+});
+
+const divideBtn = document.getElementById("divide");
+divideBtn.addEventListener("click", () => {
+    if (currentOperator == "-") {
+        previousNumber = minus(Number(previousNumber), Number(currentNumber));
+        currentOperator = "/";
+        currentNumber = "";
+        refreshDisplay()
+    } else if (currentOperator == "+") {
+        previousNumber = add(Number(previousNumber), Number(currentNumber));
+        currentOperator = "/";
+        currentNumber = "";
+        refreshDisplay()
+    } else {
+        if (previousNumber == "") {
+            currentOperator = "/";
+            previousNumber = currentNumber;
+            currentNumber = "";
+            refreshDisplay()
+        } else {
+            currentOperator = "/";
+            previousNumber = divide(Number(previousNumber), Number(currentNumber));
             currentNumber = "";
             refreshDisplay()
         }
@@ -114,6 +156,10 @@ function multiply(num1, num2) {
     return num1 * num2;
 }
 
+function divide(num1, num2) {
+    return num1 / num2;
+}
+
 // Calculate funtion
 function calculate(operator) {
     switch (operator) {
@@ -135,10 +181,13 @@ function calculate(operator) {
             currentNumber = "";
             refreshDisplay()
             break;
+        case "/":
+            currentOperator = "";
+            previousNumber = divide(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay()
+            break;
     }
 }
 
 
-// function divide(num1, num2) {
-
-// }
