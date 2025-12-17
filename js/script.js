@@ -24,6 +24,11 @@ plusBtn.addEventListener("click", () => {
         currentOperator = "+";
         currentNumber = "";
         refreshDisplay()
+    } else if (currentOperator == "*") {
+        previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+        currentOperator = "+";
+        currentNumber = "";
+        refreshDisplay()
     } else {
         currentOperator = "+";
         previousNumber = add(Number(previousNumber), Number(currentNumber));
@@ -34,20 +39,52 @@ plusBtn.addEventListener("click", () => {
 
 const minusBtn = document.getElementById("minus");
 minusBtn.addEventListener("click", () => {
-    if (currentOperator == "+") {
-        previousNumber = add(Number(previousNumber), Number(currentNumber));
+    if (currentNumber == "" && previousNumber == "") {
+        currentNumber += "-";
+        refreshDisplay();
+    } else {
+        if (currentOperator == "+") {
+            previousNumber = add(Number(previousNumber), Number(currentNumber));
+            currentOperator = "-";
+            currentNumber = "";
+            refreshDisplay()
+        }
         currentOperator = "-";
+        if (previousNumber != "") {
+            previousNumber = minus(Number(previousNumber), Number(currentNumber));
+        } else {
+            previousNumber = currentNumber;
+        }
         currentNumber = "";
         refreshDisplay()
     }
-    currentOperator = "-";
-    if (previousNumber != "") {
+});
+
+const multiplyBtn = document.getElementById("multiply");
+multiplyBtn.addEventListener("click", () => {
+    if (currentOperator == "-") {
         previousNumber = minus(Number(previousNumber), Number(currentNumber));
+        currentOperator = "*";
+        currentNumber = "";
+        refreshDisplay()
+    } else if (currentOperator == "+") {
+        previousNumber = add(Number(previousNumber), Number(currentNumber));
+        currentOperator = "*";
+        currentNumber = "";
+        refreshDisplay()
     } else {
-        previousNumber = currentNumber;
+        if (previousNumber == "") {
+            currentOperator = "*";
+            previousNumber = currentNumber;
+            currentNumber = "";
+            refreshDisplay()
+        } else {
+            currentOperator = "*";
+            previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay()
+        }
     }
-    currentNumber = "";
-    refreshDisplay()
 });
 
 const calculateBtn = document.getElementById("calculate");
@@ -73,6 +110,10 @@ function minus(num1, num2) {
     return num1 -= num2;
 }
 
+function multiply(num1, num2) {
+    return num1 * num2;
+}
+
 // Calculate funtion
 function calculate(operator) {
     switch (operator) {
@@ -88,14 +129,15 @@ function calculate(operator) {
             currentNumber = "";
             refreshDisplay()
             break;
+        case "*":
+            currentOperator = "";
+            previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+            currentNumber = "";
+            refreshDisplay()
+            break;
     }
 }
 
-
-
-// function multiply(num1, num2) {
-
-// }
 
 // function divide(num1, num2) {
 
