@@ -25,6 +25,12 @@ function appendOperator(operator) {
         calculate(operator);
         refreshDisplay();
     }
+
+    if (previousNumber == "" && currentNumber == "") {
+            currentNumber += "-";
+            currentOperator = "";
+            refreshDisplay();
+    }
 }
 
 // Refresh display
