@@ -56,17 +56,15 @@ function refreshDisplay() {
 // Calculate button 
 const calculateBtn = document.getElementById("calculate");
 calculateBtn.addEventListener("click", () => {
-    if (currentNumber == "") {
+    if (previousNumber != "" && currentOperator != "") {
         return;
-    }
-    
-    if (currentNumber == "-" || currentOperator == "") {
+    } else if (currentNumber == "-" || currentOperator == "") {
         return;
+    } else {
+        calculate(currentOperator);
+        currentOperator = "";
+        refreshDisplay();
     }
-
-    calculate(currentOperator);
-    currentOperator = "";
-    refreshDisplay();
 });
 
 // Clear function
