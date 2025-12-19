@@ -4,45 +4,55 @@ const display = document.querySelector(".display");
 let previousNumber = "";
 let currentNumber = "";
 let currentOperator = "";
+let calculated = false;
 
 // Add number
 function addNumber(number) {
+    if (previousNumber != "" && calculated == true && currentOperator == "") {
+        return;
+    }
+
     currentNumber += number;
     refreshDisplay();
 }
 
 // Add operator
 function addOperator(operator) {
-    if (currentOperator == "*" && operator == "/" && currentNumber == "") {
-        currentOperator = operator;
+    if (previousNumber === 0 && currentOperator == "") {
+        currentOperator = operator
         refreshDisplay();
     } else {
-        if (currentNumber == "-") {
-            return;
-        }
-
-        if (previousNumber != "" && currentNumber == "") {
-            currentOperator = operator;
-            refreshDisplay();
-        }
-
-        if (currentOperator != "") {
-            calculate(currentOperator);
+        if (currentOperator == "*" && operator == "/" && currentNumber == "") {
             currentOperator = operator;
             refreshDisplay();
         } else {
-            calculate(operator);
-            refreshDisplay();
-        }
+            if (currentNumber == "-") {
+                return;
+            }
 
-        if (previousNumber == "" && currentNumber == "") {
-            if (operator == "-") {
-                currentNumber += "-";
-                currentOperator = "";
+            if (previousNumber != "" && currentNumber == "") {
+                currentOperator = operator;
+                refreshDisplay();
+            }
+
+            if (currentOperator != "") {
+                calculate(currentOperator);
+                currentOperator = operator;
                 refreshDisplay();
             } else {
-                currentOperator = "";
+                calculate(operator);
                 refreshDisplay();
+            }
+
+            if (previousNumber === "" && currentNumber == "") {
+                if (operator == "-") {
+                    currentNumber += "-";
+                    currentOperator = "";
+                    refreshDisplay();
+                } else {
+                    currentOperator = "";
+                    refreshDisplay();
+                }
             }
         }
     }
@@ -73,7 +83,7 @@ allClearBtn.addEventListener("click", () => {
     previousNumber = "";
     currentNumber = "";
     currentOperator = "";
-    display.textContent = "";
+    refreshDisplay();
 });
 
 // Math functions
@@ -95,28 +105,42 @@ function divide(num1, num2) {
 
 // Calculate funtion
 function calculate(operator) {
-    if (previousNumber == "") {
+    if (previousNumber === "") {
         previousNumber = currentNumber;
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "+") {
         previousNumber = add(Number(previousNumber), Number(currentNumber));
+            calculated = true
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "-") {
         previousNumber = minus(Number(previousNumber), Number(currentNumber));
+            calculated = true
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "*") {
         if (currentNumber != "") {
             previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+                calculated = true
             currentNumber = "";
             refreshDisplay();
         }
     } else if (operator == "/") {
-        previousNumber = divide(Number(previousNumber), Number(currentNumber));
-        currentNumber = "";
-        refreshDisplay();
+        if (Number(currentNumber) === 0) {
+            previousNumber = "";
+            currentNumber = "";
+            currentOperator = "";
+            refreshDisplay();
+            alert("You are not allowed to divide by 0 or nothing :D");
+        } else {
+            if (currentNumber !== "") {
+                previousNumber = divide(Number(previousNumber), Number(currentNumber));
+                    calculated = true
+                currentNumber = "";
+                refreshDisplay();
+            }
+        }
     }
 
     currentOperator = operator;
