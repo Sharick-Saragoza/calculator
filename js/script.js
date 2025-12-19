@@ -48,15 +48,16 @@ function refreshDisplay() {
     display.textContent = `${previousNumber} ${currentOperator} ${currentNumber}`;
 }
 
+// Calculate button 
 const calculateBtn = document.getElementById("calculate");
 calculateBtn.addEventListener("click", () => {
-    if (currentNumber == "-") {
+    if (currentNumber == "-" || currentOperator == "") {
         return;
-    } else {
-        calculate(currentOperator);
-        currentOperator = "";
-        refreshDisplay();
     }
+
+    calculate(currentOperator);
+    currentOperator = "";
+    refreshDisplay();
 });
 
 // Clear function
