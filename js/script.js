@@ -13,32 +13,37 @@ function appendNumber(number) {
 
 // Append operator
 function appendOperator(operator) {
-    if (currentNumber == "-") {
-        return;
-    }
-
-    if (previousNumber != "" && currentNumber == "") {
-        currentOperator = operator;
-        refreshDisplay();
-    }
-
-    if (currentOperator != "") {
-        calculate(currentOperator);
+    if (currentOperator == "*" && operator == "/") {
         currentOperator = operator;
         refreshDisplay();
     } else {
-        calculate(operator);
-        refreshDisplay();
-    }
+        if (currentNumber == "-") {
+            return;
+        }
 
-    if (previousNumber == "" && currentNumber == "") {
-        if (operator == "-") {
-            currentNumber += "-";
-            currentOperator = "";
+        if (previousNumber != "" && currentNumber == "") {
+            currentOperator = operator;
+            refreshDisplay();
+        }
+
+        if (currentOperator != "") {
+            calculate(currentOperator);
+            currentOperator = operator;
             refreshDisplay();
         } else {
-            currentOperator = "";
+            calculate(operator);
             refreshDisplay();
+        }
+
+        if (previousNumber == "" && currentNumber == "") {
+            if (operator == "-") {
+                currentNumber += "-";
+                currentOperator = "";
+                refreshDisplay();
+            } else {
+                currentOperator = "";
+                refreshDisplay();
+            }
         }
     }
 }
