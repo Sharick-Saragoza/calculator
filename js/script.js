@@ -4,20 +4,31 @@ const display = document.querySelector(".display");
 let previousNumber = "";
 let currentNumber = "";
 let currentOperator = "";
-let calculated = false;
 
 // Add number
 function addNumber(number) {
-    if (previousNumber != "" && calculated == true && currentOperator == "") {
-        return;
-    }
+    if (previousNumber == Infinity || previousNumber == NaN) {
+        previousNumber = "";
+        currentNumber = "";
+        currentNumber += number;
+        currentOperator = "";
+        refreshDisplay();
+    } else {
+        if (previousNumber !== "" && currentOperator == "") {
+            return;
+        }
 
-    currentNumber += number;
-    refreshDisplay();
+        currentNumber += number;
+        refreshDisplay();
+    }
 }
 
 // Add operator
 function addOperator(operator) {
+    if (previousNumber == Infinity || previousNumber == NaN) {
+        return;
+    }
+    
     if (previousNumber === 0 && currentOperator == "") {
         currentOperator = operator
         refreshDisplay();
@@ -111,35 +122,23 @@ function calculate(operator) {
         refreshDisplay();
     } else if (operator == "+") {
         previousNumber = add(Number(previousNumber), Number(currentNumber));
-            calculated = true
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "-") {
         previousNumber = minus(Number(previousNumber), Number(currentNumber));
-            calculated = true
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "*") {
         if (currentNumber != "") {
             previousNumber = multiply(Number(previousNumber), Number(currentNumber));
-                calculated = true
             currentNumber = "";
             refreshDisplay();
         }
     } else if (operator == "/") {
-        if (Number(currentNumber) === 0) {
-            previousNumber = "";
+        if (currentNumber !== "") {
+            previousNumber = divide(Number(previousNumber), Number(currentNumber));
             currentNumber = "";
-            currentOperator = "";
             refreshDisplay();
-            alert("You are not allowed to divide by 0 or nothing :D");
-        } else {
-            if (currentNumber !== "") {
-                previousNumber = divide(Number(previousNumber), Number(currentNumber));
-                    calculated = true
-                currentNumber = "";
-                refreshDisplay();
-            }
         }
     }
 
