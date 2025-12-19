@@ -56,7 +56,7 @@ function refreshDisplay() {
 // Calculate button 
 const calculateBtn = document.getElementById("calculate");
 calculateBtn.addEventListener("click", () => {
-    if (previousNumber != "" && currentOperator != "") {
+    if (previousNumber != "" && currentOperator != "" && currentNumber == "") {
         return;
     } else if (currentNumber == "-" || currentOperator == "") {
         return;
