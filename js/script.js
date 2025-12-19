@@ -5,15 +5,15 @@ let previousNumber = "";
 let currentNumber = "";
 let currentOperator = "";
 
-// Append number
-function appendNumber(number) {
+// Add number
+function addNumber(number) {
     currentNumber += number;
     refreshDisplay();
 }
 
-// Append operator
-function appendOperator(operator) {
-    if (currentOperator == "*" && operator == "/") {
+// Add operator
+function addOperator(operator) {
+    if (currentOperator == "*" && operator == "/" && currentNumber == "") {
         currentOperator = operator;
         refreshDisplay();
     } else {
