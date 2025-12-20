@@ -7,17 +7,15 @@ let currentOperator = "";
 
 // Add number
 function addNumber(number) {
-    if (previousNumber == Infinity || previousNumber == NaN) {
+    if (previousNumber == Infinity || isNaN(previousNumber)) {
         previousNumber = "";
         currentNumber = "";
         currentNumber += number;
         currentOperator = "";
         refreshDisplay();
+    } else if (previousNumber !== "" && currentOperator == "") {
+        return;
     } else {
-        if (previousNumber !== "" && currentOperator == "") {
-            return;
-        }
-
         currentNumber += number;
         refreshDisplay();
     }
@@ -25,49 +23,40 @@ function addNumber(number) {
 
 // Add operator
 function addOperator(operator) {
-    if (previousNumber == Infinity || previousNumber == NaN) {
+    if (previousNumber == Infinity || isNaN(previousNumber)) {
         return;
-    }
-    
-    if (previousNumber === 0 && currentOperator == "") {
+    } else if (previousNumber === 0 && currentOperator == "") {
         currentOperator = operator
         refreshDisplay();
+    } else if (currentOperator == "*" && operator == "/" && currentNumber == "") {
+        currentOperator = operator;
+        refreshDisplay();
+    } else if (currentNumber == "-") {
+        return;
+    } else if (previousNumber != "" && currentNumber == "") {
+        currentOperator = operator;
+        refreshDisplay();
+    } else if (currentOperator != "") {
+        calculate(currentOperator);
+        currentOperator = operator;
+        refreshDisplay();
     } else {
-        if (currentOperator == "*" && operator == "/" && currentNumber == "") {
-            currentOperator = operator;
+        calculate(operator);
+        refreshDisplay();
+    }
+
+    if (previousNumber === "" && currentNumber == "") {
+        if (operator == "-") {
+            currentNumber += "-";
+            currentOperator = "";
             refreshDisplay();
         } else {
-            if (currentNumber == "-") {
-                return;
-            }
-
-            if (previousNumber != "" && currentNumber == "") {
-                currentOperator = operator;
-                refreshDisplay();
-            }
-
-            if (currentOperator != "") {
-                calculate(currentOperator);
-                currentOperator = operator;
-                refreshDisplay();
-            } else {
-                calculate(operator);
-                refreshDisplay();
-            }
-
-            if (previousNumber === "" && currentNumber == "") {
-                if (operator == "-") {
-                    currentNumber += "-";
-                    currentOperator = "";
-                    refreshDisplay();
-                } else {
-                    currentOperator = "";
-                    refreshDisplay();
-                }
-            }
+            currentOperator = "";
+            refreshDisplay();
         }
     }
 }
+
 
 // Refresh display
 function refreshDisplay() {
