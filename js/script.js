@@ -63,8 +63,7 @@ function refreshDisplay() {
 }
 
 // Calculate button 
-const calculateBtn = document.getElementById("calculate");
-calculateBtn.addEventListener("click", () => {
+const calculateBtn = document.getElementById("calculate").addEventListener("click", () => {
     if (previousNumber != "" && currentOperator != "" && currentNumber == "") {
         return;
     } else if (currentNumber == "-" || currentOperator == "") {
@@ -85,13 +84,20 @@ function allClear() {
 }
 
 // All clear button
-const allClearBtn = document.getElementById("ac");
-allClearBtn.addEventListener("click", allClear);
+const allClearBtn = document.getElementById("ac").addEventListener("click", allClear);
 
-const backspaceBtn = document.getElementById("backspace");
-backspaceBtn.addEventListener("click", () => {  
+const backspaceBtn = document.getElementById("backspace").addEventListener("click", () => {  
     currentNumber = currentNumber.slice(0, -1);
     refreshDisplay();
+})
+
+const dotBtn = document.getElementById("dot").addEventListener("click", () => {
+    if (currentNumber.includes(".")) {
+        return;
+    } else {
+        currentNumber += "."
+        refreshDisplay();
+    }
 })
 
 // Math functions
@@ -118,22 +124,22 @@ function calculate(operator) {
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "+") {
-        previousNumber = add(Number(previousNumber), Number(currentNumber));
+        previousNumber = add(Number(previousNumber), Number(currentNumber)).toFixed(2);
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "-") {
-        previousNumber = minus(Number(previousNumber), Number(currentNumber));
+        previousNumber = minus(Number(previousNumber), Number(currentNumber)).toFixed(2);
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "*") {
         if (currentNumber != "") {
-            previousNumber = multiply(Number(previousNumber), Number(currentNumber));
+            previousNumber = multiply(Number(previousNumber), Number(currentNumber)).toFixed(2);
             currentNumber = "";
             refreshDisplay();
         }
     } else if (operator == "/") {
         if (currentNumber !== "") {
-            previousNumber = divide(Number(previousNumber), Number(currentNumber));
+            previousNumber = divide(Number(previousNumber), Number(currentNumber)).toFixed(2);
             currentNumber = "";
             refreshDisplay();
         }
