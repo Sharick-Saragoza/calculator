@@ -8,13 +8,12 @@ let currentOperator = "";
 // Add number
 function addNumber(number) {
     if (previousNumber == Infinity || isNaN(previousNumber)) {
-        previousNumber = "";
-        currentNumber = "";
+        allClear();
         currentNumber += number;
-        currentOperator = "";
-        refreshDisplay();
     } else if (previousNumber !== "" && currentOperator == "") {
-        return;
+        allClear();
+        currentNumber += number;
+        refreshDisplay();
     } else {
         currentNumber += number;
         refreshDisplay();
@@ -78,13 +77,16 @@ calculateBtn.addEventListener("click", () => {
 });
 
 // Clear function
-const allClearBtn = document.getElementById("ac");
-allClearBtn.addEventListener("click", () => {
+function allClear() {
     previousNumber = "";
     currentNumber = "";
     currentOperator = "";
     refreshDisplay();
-});
+}
+
+// All clear button
+const allClearBtn = document.getElementById("ac");
+allClearBtn.addEventListener("click", allClear);
 
 // Math functions
 function add(num1, num2) {
