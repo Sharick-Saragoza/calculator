@@ -124,27 +124,28 @@ function calculate(operator) {
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "+") {
-        previousNumber = add(Number(previousNumber), Number(currentNumber)).toFixed(2);
+        previousNumber = add(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
         refreshDisplay();
     } else if (operator == "-") {
-        previousNumber = minus(Number(previousNumber), Number(currentNumber)).toFixed(2);
+        previousNumber = minus(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
+  
         refreshDisplay();
     } else if (operator == "*") {
         if (currentNumber != "") {
-            previousNumber = multiply(Number(previousNumber), Number(currentNumber)).toFixed(2);
+            previousNumber = multiply(Number(previousNumber), Number(currentNumber));
             currentNumber = "";
             refreshDisplay();
         }
     } else if (operator == "/") {
         if (currentNumber !== "") {
-            previousNumber = divide(Number(previousNumber), Number(currentNumber)).toFixed(2);
+            previousNumber = divide(Number(previousNumber), Number(currentNumber));
             currentNumber = "";
             refreshDisplay();
         }
     }
-
+    
     currentOperator = operator;
 }
 
