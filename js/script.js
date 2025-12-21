@@ -88,6 +88,12 @@ function allClear() {
 const allClearBtn = document.getElementById("ac");
 allClearBtn.addEventListener("click", allClear);
 
+const backspaceBtn = document.getElementById("backspace");
+backspaceBtn.addEventListener("click", () => {  
+    currentNumber = currentNumber.slice(0, -1);
+    refreshDisplay();
+})
+
 // Math functions
 function add(num1, num2) {
     return num1 += num2;
