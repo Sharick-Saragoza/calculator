@@ -16,33 +16,34 @@
                 <div class="display"></div>
             </div>
             <div class="calc-bot">
-                <div class="calc-row ac">
-                    <div class="button ac" id="ac">AC</div>
+                <div class="calc-row">
+                    <button id="ac">AC</button>
+                    <button id="backspace" >←</button>
+                    <button onclick="addOperator('/')">÷</button>
                 </div>
                 <div class="calc-row">
-                    <div class="button" onclick="addNumber(7)">7</div>
-                    <div class="button" onclick="addNumber(8)">8</div>
-                    <div class="button" onclick="addNumber(9)">9</div>
-                    <div class="button" onclick="addOperator('/')">÷</div>
+                    <button onclick="addNumber(7)">7</button>
+                    <button onclick="addNumber(8)">8</button>
+                    <button onclick="addNumber(9)">9</button>
+                    <button onclick="addOperator('*')">x</button>
                 </div>
                 <div class="calc-row">
-                    <div class="button" onclick="addNumber(4)">4</div>
-                    <div class="button" onclick="addNumber(5)">5</div>
-                    <div class="button" onclick="addNumber(6)">6</div>
-                    <div class="button" onclick="addOperator('*')">x</div>
+                    <button onclick="addNumber(4)">4</button>
+                    <button onclick="addNumber(5)">5</button>
+                    <button onclick="addNumber(6)">6</button>
+                    <button onclick="addOperator('-')">-</button>
                 </div>
                 <div class="calc-row">
-                    <div class="button" onclick="addNumber(1)">1</div>
-                    <div class="button" onclick="addNumber(2)">2</div>
-                    <div class="button" onclick="addNumber(3)">3</div>
-                    <div class="button" onclick="addOperator('-')">-</div>
+                    <button onclick="addNumber(1)">1</button>
+                    <button onclick="addNumber(2)">2</button>
+                    <button onclick="addNumber(3)">3</button>
+                    <button onclick="addOperator('+')">+</button>
                 </div>
-                <div class="calc-row zero">
-                    <div class="button" onclick="addNumber(0)">0</div>
-                    <div class="button" onclick="addOperator('+')">+</div>
-                </div>
-                <div class="calc-row operate">
-                    <div class="button" id="calculate">=</div>
+
+                <div class="calc-row">
+                    <button id="zero" onclick="addNumber(0)">0</button>
+                    <button id="dot">.</button>
+                    <button id="calculate">=</button>
                 </div>
             </div>
         </div>

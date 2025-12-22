@@ -11,6 +11,8 @@ body {
     background-color: rgb(199, 199, 199);
     height: 650px;
     width: 400px;
+    border-radius: 10px 10px 0 0;
+    border: 2px black solid;
 }
 
 .calculator {
@@ -24,8 +26,9 @@ body {
     flex-direction: column;
     justify-content: center;
     background-color: grey;
-    flex: 1;
-    padding: 10px 50px 10px 50px;
+    padding: 10px 25px 10px 25px;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 2px black solid;
 }
 
 .calc-bot {
@@ -41,20 +44,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70px;
+    flex: 1 1 70px;
     background-color: green;
     font-size: x-large;
     color: rgb(50, 209, 76);
+    margin: 25px 0px;
+    border-radius: 5px;
+    border: 2px black solid;
 }
 
 .calc-row {
     display: flex;
-    gap: 25px;
+    gap: 15px;
 }
 
-.button {
+button {
+    flex: 1 1 60px;
     height: 60px;
-    width: 60px;
     background-color: grey;
     display: flex;
     justify-content: center;
@@ -62,20 +68,17 @@ body {
     font-size: xx-large;
     cursor: pointer;
     color: black;
+    border: 2px black solid;
 }
 
-.button:hover {
+button:hover {
     background-color: rgb(158, 156, 156);
 }
 
-.ac {
-    width: 140px;
+button:active {
+    background-color: rgb(134, 133, 133);
 }
 
-.operate {
-    justify-content: end;
-}
-
-.zero {
-    justify-content: space-between;
+#ac, #zero {
+    flex: 1 1 142.5px;
 }

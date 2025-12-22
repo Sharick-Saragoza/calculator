@@ -7,17 +7,14 @@ let currentOperator = "";
 
 // Add number
 function addNumber(number) {
-    if (previousNumber == Infinity || previousNumber == NaN) {
-        previousNumber = "";
-        currentNumber = "";
+    if (previousNumber == Infinity || isNaN(previousNumber)) {
+        allClear();
         currentNumber += number;
-        currentOperator = "";
+    } else if (previousNumber !== "" && currentOperator == "") {
+        allClear();
+        currentNumber += number;
         refreshDisplay();
     } else {
-        if (previousNumber !== "" && currentOperator == "") {
-            return;
-        }
-
         currentNumber += number;
         refreshDisplay();
     }
@@ -25,49 +22,40 @@ function addNumber(number) {
 
 // Add operator
 function addOperator(operator) {
-    if (previousNumber == Infinity || previousNumber == NaN) {
+    if (previousNumber == Infinity || isNaN(previousNumber)) {
         return;
-    }
-    
-    if (previousNumber === 0 && currentOperator == "") {
+    } else if (previousNumber === 0 && currentOperator == "") {
         currentOperator = operator
         refreshDisplay();
+    } else if (currentOperator == "*" && operator == "/" && currentNumber == "") {
+        currentOperator = operator;
+        refreshDisplay();
+    } else if (currentNumber == "-") {
+        return;
+    } else if (previousNumber != "" && currentNumber == "") {
+        currentOperator = operator;
+        refreshDisplay();
+    } else if (currentOperator != "") {
+        calculate(currentOperator);
+        currentOperator = operator;
+        refreshDisplay();
     } else {
-        if (currentOperator == "*" && operator == "/" && currentNumber == "") {
-            currentOperator = operator;
+        calculate(operator);
+        refreshDisplay();
+    }
+
+    if (previousNumber === "" && currentNumber == "") {
+        if (operator == "-") {
+            currentNumber += "-";
+            currentOperator = "";
             refreshDisplay();
         } else {
-            if (currentNumber == "-") {
-                return;
-            }
-
-            if (previousNumber != "" && currentNumber == "") {
-                currentOperator = operator;
-                refreshDisplay();
-            }
-
-            if (currentOperator != "") {
-                calculate(currentOperator);
-                currentOperator = operator;
-                refreshDisplay();
-            } else {
-                calculate(operator);
-                refreshDisplay();
-            }
-
-            if (previousNumber === "" && currentNumber == "") {
-                if (operator == "-") {
-                    currentNumber += "-";
-                    currentOperator = "";
-                    refreshDisplay();
-                } else {
-                    currentOperator = "";
-                    refreshDisplay();
-                }
-            }
+            currentOperator = "";
+            refreshDisplay();
         }
     }
 }
+
 
 // Refresh display
 function refreshDisplay() {
@@ -75,8 +63,7 @@ function refreshDisplay() {
 }
 
 // Calculate button 
-const calculateBtn = document.getElementById("calculate");
-calculateBtn.addEventListener("click", () => {
+const calculateBtn = document.getElementById("calculate").addEventListener("click", () => {
     if (previousNumber != "" && currentOperator != "" && currentNumber == "") {
         return;
     } else if (currentNumber == "-" || currentOperator == "") {
@@ -89,13 +76,29 @@ calculateBtn.addEventListener("click", () => {
 });
 
 // Clear function
-const allClearBtn = document.getElementById("ac");
-allClearBtn.addEventListener("click", () => {
+function allClear() {
     previousNumber = "";
     currentNumber = "";
     currentOperator = "";
     refreshDisplay();
-});
+}
+
+// All clear button
+const allClearBtn = document.getElementById("ac").addEventListener("click", allClear);
+
+const backspaceBtn = document.getElementById("backspace").addEventListener("click", () => {  
+    currentNumber = currentNumber.slice(0, -1);
+    refreshDisplay();
+})
+
+const dotBtn = document.getElementById("dot").addEventListener("click", () => {
+    if (currentNumber.includes(".")) {
+        return;
+    } else {
+        currentNumber += "."
+        refreshDisplay();
+    }
+})
 
 // Math functions
 function add(num1, num2) {
@@ -127,6 +130,7 @@ function calculate(operator) {
     } else if (operator == "-") {
         previousNumber = minus(Number(previousNumber), Number(currentNumber));
         currentNumber = "";
+  
         refreshDisplay();
     } else if (operator == "*") {
         if (currentNumber != "") {
@@ -141,7 +145,7 @@ function calculate(operator) {
             refreshDisplay();
         }
     }
-
+    
     currentOperator = operator;
 }
 
