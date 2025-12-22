@@ -92,7 +92,7 @@ const backspaceBtn = document.getElementById("backspace").addEventListener("clic
 })
 
 const dotBtn = document.getElementById("dot").addEventListener("click", () => {
-    if (currentNumber.includes(".")) {
+    if (currentNumber.includes(".") || previousNumber != "" && currentNumber == "") {
         return;
     } else {
         currentNumber += "."
