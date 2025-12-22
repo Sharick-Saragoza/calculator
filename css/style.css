@@ -61,6 +61,7 @@ body {
     align-items: center;
     font-size: xx-large;
     cursor: pointer;
+    color: black;
 }
 
 .button:hover {
